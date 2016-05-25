@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+       <script type="text/javascript">
+       google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      
+     
+      function drawChart() {
+       document.getElementById("form1").onchange=function() { 
+      
+      mycounty = document.getElementById("thedropdown").value;
+     
+     
+     info = [{county: "Adams", tax: "retail", Jan: 400, Feb: 800, Mar: 200, Apr: 300, May: 700},
+     {county: "Adams", tax: "additional", Jan: 450, Feb: 900, Mar: 300, Apr: 500, May: 800},
+     {county: "Boulder", tax: "retail", Jan: 500, Feb: 700, Mar: 500, Apr: 800, May: 600},
+     {county: "Boulder", tax: "additional", Jan: 320, Feb: 500, Mar: 600, Apr: 100, May: 600}
+     ];
+     
+     
+     for(i=0; i<info.length; i++) { 
+    if(mycounty == info[i].county && info[i].tax=="retail") {
+       Janretail = parseInt(info[i].Jan);
+       Febretail = parseInt(info[i].Feb);
+       Marretail = parseInt(info[i].Mar);
+       Aprretail = parseInt(info[i].Apr);
+       Mayretail = parseInt(info[i].May);
+    
+    }// end if
+    
+    if(mycounty == info[i].county && info[i].tax=="additional") {
+       Janadditional = parseInt(info[i].Jan);
+       Febadditional = parseInt(info[i].Feb);
+       Maradditional = parseInt(info[i].Mar);
+       Apradditional = parseInt(info[i].Apr);
+       Mayadditional = parseInt(info[i].May);
+       
+    }// end if
+    } // end for
+    
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Retail', 'Additional'],
+          ['Jan', Janretail, Janadditional],
+          ['Feb', Febretail, Febadditional],
+          ['Mar', Marretail, Maradditional],
+          ['Apr', Aprretail, Apradditional],
+          ['May', Mayretail, Mayadditional]
+         
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Revenue',
+            subtitle: 'Add a Subtitle',
+             
+          }
+        };
+
+        var chart = new google.charts.Line(document.getElementById('div_chart'));
+
+        chart.draw(data, options);
+      }
+      }
+    </script>
+  
+ 
+
+ 
+  </head>
+  <body>
+  <form id="form1" name="form1"  >
+     
+     <select id="thedropdown">
+     <option value="0">Choose:</option>
+     <option value="Adams">Adams</option>
+     <option value="Boulder">Boulder</option>
+     </select>
+    
+  </form>
+  <div>
+    <div id="div_chart" style="width: 900px; height: 500px;"></div>
+    </div>
+     
+  </body>
+</html>
+
+

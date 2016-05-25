@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["map"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+      
+       mydata= [
+       {Lat: 40.00502079,Long: -105.3065126,Name:'Flagstaff Summit West', Picnic:'yes'},
+          {Lat:40.00418774,Long:-105.3034886,Name:'Flagstaff Summit West',Picnic:'yes'},
+          {Lat:40.06203476,Long:-105.1317793,Name:'White Rocks',Picnic:'no'},
+          {Lat:40.11129787,Long:-105.3064337,Name:'Buckingham Park',Picnic:'yes'} 
+       
+       ]; 
+       
+       var data = google.visualization.arrayToDataTable([
+          ['Lat', 'Long', 'Name', 'Picnic'],
+          [mydata[i].Lat,mydata[i].Long,mydata[i].Name, mydata[i].Picnic],
+          
+        ]);
+      for(i=0; i<mydata.length; i++) {
+      newdata = [mydata[i].Lat,mydata[i].Long,mydata[i].Name, mydata[i].Picnic];
+        data += newdata + " ,";
+          
+          
+        ]);
+        
+        }
+        
+       
+           
+
+        var map = new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(data, {showTip: true});
+      }
+     
+
+    </script>
+  </head>
+
+  <body>
+  
+  <select id="thedropdown">
+  <option value="0">Choose Picnic:</option>
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+</select>
+
+</form>
+    <div id="map_div" style="width: 400px; height: 300px"></div>
+  </body>
+</html>

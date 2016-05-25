@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+  
+  <style>
+  #map_container {
+  width:100%;
+  }
+  </style>
+  
+  
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.charts.load('current', { 'packages': ['map'] });
+      google.charts.setOnLoadCallback(drawMap);
+      
+      //data is formatted for google map
+      function drawMap() {
+      var totalData = [ 
+      ['Country', 'Population'],
+        ['China', 'China: Population by thousands: 50,465 <br /></td><td>Exposed: 4%'],
+        ['Vietnam', 'Vietnam: 23,407 <br /></td><td>Exposed: 26%'],
+        ['Bangladesh', 'Bangladesh: 10,230 <br /></td><td>Exposed: 7%'],
+        ['Indonesia', 'Indonesia: 10,157 <br /></td><td>Exposed: 4%'],
+        ['Thailand', 'Thailand: 8,176 <br/></td><td>Exposed: 12%'],
+        ['Netherlands', 'Netherlands: 7,793 <br/></td><td>Exposed: 47%'],
+        ['Philippines', 'Philippines: 6,205 <br/></td><td>Exposed: 7%'],
+        ['Myanmar', 'Myanmar: 4,742 <br</></td><td>Exposed: 9%'],
+        ['United States', 'United States: 3,087 <br/></td><td>Exposed: 1%'],
+        ['United Kingdom', 'United Kingdom: 2,574 <br /></td><td>Exposed: 4%'],
+        ['Brazil', 'Brazil: 1,737 <br/></td><td>Exposed: 1%'],
+        ['Germany', 'Germany: 1,665 <br /></td><td>Exposed: 2%'],
+        ['France', 'France: 1,256 <br /></td><td>Exposed: 2%'],
+        ['Malaysia', 'Malaysia: 1,171 <br /></td><td>Exposed: 4%'],
+        ['Talwan', 'Talwan: 1,032 <br /></td><td>Exposed: 4%'],
+        ['Korea, Republic of', 'Korea, Republic of: 1,028 <br /></td><td>Exposed: 2%'],
+        ['Nigeria', 'Nigeria: 848 <br /></td><td>Exposed: 1%'],
+        ['Italy', 'Italy: 842 <br /></td><td>Exposed: 1%'],
+	];	
+	
+	var percentData = [ 
+      ['Country', 'Population'],
+        ['Netherlands', 'Netherlands: 7,793 <br /></td><td>47%'],
+		['Vietnam', 'Vietnam: 23,407 <br /></td><td>26%'],
+		['Thailand', 'Thailand:  8,176 <br /></td><td>12%'],
+		['Japan', 'Japan: 12,751 <br /></td><td>10%'],
+		['Myanmar', 'Myanmar: 4,742<br /></td><td>9%'],
+		['Bangladesh', 'Bangladesh: 10,230<br /></td><td>7%'],
+		['United Arab Emirates', 'United Arab Emirates: 570<br /></td><td>7%'],
+		['Philippines', 'Philippines: 6,205<br /></td><td>7%'],
+		['Bahrain', 'Bahrain: 80<br /></td><td>6%'],
+		['Belgium', 'Belgium: 619<br /></td><td>6%'], 
+		['Oman', 'Oman: 148<br /></td><td> 5%'],
+		['Talwan', 'Talwan: 1,302<br /></td><td>4%'],
+		['Indonesia', 'Indonesia: 10,157<br /></td><td>4%'],
+		['Denmark', 'Denmark: 232<br /></td><td>4%'],
+		['United Kingdom', 'United Kingdom: 2,574<br /></td><td>4%'],
+		['Malaysia', 'Malaysia: 1,171<br /></td><td>4%'],
+		['China', 'China: 50,465<br /></td><td>4%'],
+		['Hong Kong', 'Hong Kong: 241<br /></td><td>3%'],  
+		['Cambodia', 'Cambodia:  449<br /></td><td> 3%'], 
+		['Ireland', 'Ireland: 133<br /></td><td> 3%'],
+	];	
+	
+	
+	 
+	          //form to change based on dropdown
+        document.getElementById("form1").onchange=function() {  
+        selection = document.getElementById("thedropdown").value;
+        
+        if(selection=="Population") {
+        //writes data to html for initial view, line by line with breaks
+       
+        document.getElementById("answer").innerHTML = "";
+        for(i=1; i<totalData.length; i++) {
+        document.getElementById("answer").innerHTML +=  "<tr><td>" + totalData[i][1] + "</td></tr>" ; 
+        } //end for
+       
+        // creates visualization using newData array
+        var data = google.visualization.arrayToDataTable(totalData);
+        
+        var map = new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(data, {showTip: true});
+        } // end if
+        
+        
+        //data is formatted for google map
+    
+      
+	
+	       
+        
+        if(selection=="Percent") {
+	 //writes data to html for initial view, line by line with breaks
+	   document.getElementById("answer").innerHTML = "";
+        for(i=1; i<percentData.length; i++) {
+        document.getElementById("answer").innerHTML +=  "<tr><td>" +  percentData[i][1] + "</td></tr>" ; 
+        } //end for
+        
+        // creates visualization using newData array
+        var data = google.visualization.arrayToDataTable(percentData);
+        
+        var map = new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(data, {showTip: true});
+         
+        
+        }// end if
+        
+        } //end change on dropdown
+        } //end drawMap
+       
+     
+    
+    </script>
+  </head>
+
+  <body>
+  <div id="map_container">
+  <p>Search for Country Exposed by Percent or Population.</p>
+  <form id="form1">
+  <select id="thedropdown">
+  <option value="0";>Choose Country:</option>
+  <option value="Percent">Percent</option>
+  <option value="Population">Population</option>
+</select>
+
+</form>
+
+    <div id="map_div"></div>
+
+    <table id="answer" width="70%">
+</table>
+</div>
+  
+  </body>
+</html>

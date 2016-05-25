@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      
+      function drawChart() {
+      
+      mycity = document.getElementById("thedropdown").value;
+     
+     
+     info = [{city: "Austin", gender: "male", work: 40, eat: 8, commute: 2, tv: 3, sleep: 7},
+     {city: "Austin", gender: "female", work: 45, eat: 9, commute: 3, tv: 5, sleep: 8},
+     {city: "Boulder", gender: "male", work: 50, eat: 7, commute: 5, tv: 8, sleep: 6},
+     {city: "Boulder", gender: "female", work: 32, eat: 5, commute: 6, tv: 10, sleep: 6}
+     ];
+     
+     for(i=0; i<info.length; i++) { 
+    if(mycity == info[i].city && info[i].gender=="male") {
+       workmale = parseInt(info[i].work);
+       eatmale = parseInt(info[i].eat);
+       commutemale = parseInt(info[i].commute);
+       tvmale = parseInt(info[i].tv);
+       sleepmale = parseInt(info[i].sleep);
+    
+    }// end if
+    
+    if(mycity == info[i].city && info[i].gender=="female") {
+       workfemale = parseInt(info[i].work);
+       eatfemale = parseInt(info[i].eat);
+       commutefemale = parseInt(info[i].commute);
+       tvfemale = parseInt(info[i].tv);
+       sleepfemale = parseInt(info[i].sleep);
+    
+    }// end if
+    } // end for
+    
+        var data = google.visualization.arrayToDataTable([
+          ['Element', 'Male', 'Female'],
+          ['work', workmale, workfemale],
+          ['eat', eatmale, eatfemale],
+          ['commute', commutemale, commutefemale],
+          ['tv', tvmale, tvfemale],
+          ['sleep', sleepmale, sleepfemale]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Weekly Activities',
+            subtitle: 'Work, Eating, Commuting, TV and Sleeping',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('div_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+  <form  action="#" id="form1" name="form1" onchange="drawChart(); return false" >
+     
+     <select id="thedropdown">
+     <option value="0">Choose:</option>
+     <option value="Austin">Austin</option>
+     <option value="Boulder">Boulder</option>
+     </select>
+    
+  </form>
+  <div style="width: 50%">
+    <div id="div_chart"></div>
+    </div>
+  </body>
+</html>
